@@ -1,9 +1,9 @@
-<h1>Sign Up</h1>
+<h1 class="text-center my-4">Sign Up</h1>
 
-<%= form_with model: @user, url: users_path do |f| %>
+<%= form_with model: @user, url: users_path, class: "needs-validation", novalidate: true do |f| %>
   <% if @user.errors.any? %>
-    <div class="errors">
-      <ul>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div>
-    <%= f.label :email_address %>
-    <%= f.email_field :email_address %>
+  <div class="mb-3">
+    <%= f.label :email_address, class: "form-label" %>
+    <%= f.email_field :email_address, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+  <div class="mb-3">
+    <%= f.label :password, class: "form-label" %>
+    <%= f.password_field :password, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+  <div class="mb-3">
+    <%= f.label :password_confirmation, class: "form-label" %>
+    <%= f.password_field :password_confirmation, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= f.submit "Sign Up" %>
+  <div class="d-grid">
+    <%= f.submit "Sign Up", class: "btn btn-primary btn-lg" %>
   </div>
 <% end %>

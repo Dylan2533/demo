@@ -1,17 +1,31 @@
-<p><%= link_to "Back", products_path %></p>
+<p>
+  <%= link_to "Back", products_path, class: "btn btn-secondary mb-3" %>
+</p>
+
 <section class="product">
-  <%= image_tag @product.featured_image if @product.featured_image.attached? %>
-  <section class="product-info">
-    <% cache @product do %>
-      <h1><%= @product.name %></h1>
-      <%= @product.description %>
+  <div class="row">
+    <% if @product.featured_image.attached? %>
+      <div class="col-md-6">
+        <%= image_tag @product.featured_image, class: "img-fluid rounded shadow" %>
+      </div>
     <% end %>
 
-    <%= render "inventory", product: @product %>
+    <div class="col-md-6">
+      <section class="product-info">
+        <% cache @product do %>
+          <h1 class="h3"><%= @product.name %></h1>
+          <p><%= @product.description %></p>
+        <% end %>
 
-    <% if authenticated? %>
-      <%= link_to "Edit", edit_product_path(@product) %>
-      <%= button_to "Destroy", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-    <% end %>
-  </section>
+        <%= render "inventory", product: @product %>
+
+        <% if authenticated? %>
+          <div class="mt-3">
+            <%= link_to "Edit", edit_product_path(@product), class: "btn btn-primary me-2" %>
+            <%= button_to "Destroy", @product, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </section>
+    </div>
+  </div>
 </section>
